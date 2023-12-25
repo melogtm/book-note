@@ -1,0 +1,58 @@
+<%- include("partials/header.ejs"); %> 
+
+<main>
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Notesbook</h1>
+      <p class="lead text-body-secondary">Project to exercise integrating Postgres + NodeJs + Express. Add, edit and delete your notes based on the book you've read.</p>
+      <p>
+        <a href="/add" class="btn btn-lg btn-primary my-2">Add Book</a><br>
+        Sort by <a href="/sorted?rating">Rating</a> | <a href="/sorted?name">Name</a> | <a href="/sorted?date">Read Date</a> 
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      
+      <% locals.books.forEach((book) => { %> 
+
+        <div class="col book-<%=book.book_id%>">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" src="<%= book.book_cover %>" alt="<%=book.b_name%>" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <div class="card-body">
+              <h5 class="card-text"><%=book.b_name%> by <%= book.author %></h5>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/post/<%=book.book_id%>">View</a></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/book-delete/<%=book.book_id%>">Delete</a></button>
+                </div>
+                <small class="text-body-secondary">Rating: <%=book.rating%>/5</small>
+                <small class="text-body-secondary">Date read: <%=`${new Date(book.read_date).getFullYear()}-${new Date(book.read_date).getMonth() + 1}-${new Date(book.read_date).getDate() < 10 ? '0' + new Date(book.read_date).getDate() : new Date(book.read_date).getDate()}`%></small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <%});%>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="text-body-secondary py-5">
+<div class="container">
+  <p class="float-end mb-1">
+    <a href="#">Back to top</a>
+  </p>
+  <p class="mb-1">Notesbook © <%= `${new Date().getFullYear()}` %>, notes for your book</p>
+</div>
+</footer>
+
+<%- include("partials/footer.ejs"); %> 

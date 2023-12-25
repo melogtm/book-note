@@ -1,0 +1,18 @@
+<%- include("partials/header.ejs") %> 
+
+<form class="form-signin p-5" data-bitwarden-watching="1" method="post">
+    <div class="text-center mb-4">
+      <img class="mb-4" src="<%= book.book_cover %>" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal"><%=book.b_name%></h1>
+      <p><%=message.upper%></p>
+    </div>
+
+    <div class="form-group">
+        <textarea class="form-control" id="notearea" name="notearea" rows="3"><%= note %></textarea>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit"><%=message.lower%></button>
+    <p class="mt-5 mb-3 text-muted text-center">© Notesbook</p>
+</form>
+
+<%- include("partials/footer.ejs") %> 

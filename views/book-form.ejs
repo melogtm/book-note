@@ -1,0 +1,45 @@
+<%- include("partials/header.ejs")%>
+
+<% if (locals.serverMessage) {%>
+  <div class="alert alert-danger" role="alert">
+    <%= locals.serverMessage %> 
+  </div>
+<%}%>
+
+<form class="p-5" method="post">
+    <div class="form-group">
+      <label for="bname">Book's name</label>
+      <% if (bName) {%> 
+        <input value="<%=bName%>" type="text" class="form-control" id="bname" name="bname" disabled>
+      <%} else {%>
+        <input required type="text" class="form-control" id="bname" name="bname" placeholder="What's the title of your book?">
+      <%}%>
+    </div>
+    <div class="form-group">
+        <label for="read_date">Date when you finished this book: </label>
+        <input type="date" name="read_date" id="read_date" value="<%=dateHolder%>">
+    </div>
+    <div class="form-group">
+      <label for="rating">Your rating, from 1 to 5</label>
+      <select name="rating" class="form-control" id="rating">
+      <% if (bName) {%> 
+        <% for (let possibleUserRating = 1; possibleUserRating < 6; possibleUserRating++) { %> 
+            <% if (possibleUserRating === rating) {%> 
+              <option selected><%=possibleUserRating%></option>
+            <%} else {%> 
+              <option><%=possibleUserRating%></option>
+            <%}%>
+        <%}%>
+      <% } else {%>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+      <%}%> 
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Add Book</button>
+</form>
+
+<%- include("partials/footer.ejs")%>
